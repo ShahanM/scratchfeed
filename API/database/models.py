@@ -23,7 +23,10 @@ class Post(db.Document):
 class User(db.Document):
     created_at = db.DateTimeField(default=datetime.utcnow)
     username = db.StringField(required=True, unique=True)
+    firstname = db.StringField()
+    lastname = db.StringField()
     password = db.StringField(required=True, min_length=6)
+    enabled = db.BooleanField(required=True, default=True)
     email = db.EmailField(required=True, unique=True)
     posts = db.ListField(db.ReferenceField('Post', \
         reverse_delete_rule=db.PULL))
