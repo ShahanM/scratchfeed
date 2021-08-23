@@ -1,0 +1,16 @@
+<p>profile works!</p>
+
+<div *ngIf="timeline">
+    <p> {{ timeline.length }}</p>
+    <ul>
+        <li *ngFor="let post of timeline">
+            <p> {{ post.posted_by }} {{ post.created_at }}</p>
+            <p> {{ post.text_content }} </p>
+            <ul>
+                <li *ngFor="let comment of post.comments">
+                    <p>{{ comment }}</p>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
