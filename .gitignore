@@ -42,7 +42,7 @@ htmlcov/
 /out-tsc
 
 # dependencies
-/node_modules
+*/node_modules
 
 # misc
 /.sass-cache
@@ -55,8 +55,8 @@ testem.log
 
 # e2e
 /e2e/*.js
-/e2e/*.map
 
+/e2e/*.map
 # System Files
 .DS_Store
 Thumbs.db
