@@ -3,7 +3,6 @@
 <p style="color:red">{{ message }}</p>
 
 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-
   <div>
     <label>
       Username:
@@ -20,3 +19,4 @@
 
   <button type="submit" [disabled]="!loginForm.valid">Login</button>
 </form>
+<a routerLink="/register">Sign Up</a>

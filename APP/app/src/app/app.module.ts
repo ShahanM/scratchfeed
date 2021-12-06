@@ -11,6 +11,7 @@ import { AuthInterceptor } from './services/auth/auth.interceptor';
 import { PostComponent } from './post/post.component';
 import { ProfileComponent } from './profile/profile.component';
 import { FeedComponent } from './feed/feed.component';
+import { RegistrationComponent } from './registration/registration.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { FeedComponent } from './feed/feed.component';
     HomeComponent,
     PostComponent,
     ProfileComponent,
-    FeedComponent
+    FeedComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,
