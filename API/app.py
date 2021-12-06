@@ -1,3 +1,4 @@
+from config import MONGODB_SETTINGS
 from utils.mongoflask import MongoJSONEncoder
 from flask import Flask
 from flask_cors import CORS
@@ -17,11 +18,9 @@ app.config.from_envvar('ENV_FILE_LOCATION')
 api = Api(app, errors=errors)
 bcrypt = Bcrypt(app)
 jwt = JWTManager(app)
-CORS(app)
+CORS(app, resources={r"/api/*": {"origins": "*"}})
 
-app.config['MONGODB_SETTINGS'] = {
-    'host': 'mongodb://localhost/scratchfeed'
-}
+app.config['MONGODB_SETTINGS'] = MONGODB_SETTINGS
 
 initialize_db(app)
 initialize_routes(api)

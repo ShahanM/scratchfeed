@@ -25,13 +25,13 @@ user_info_schema = {
 }
 
 
-class SignupApi(Resource):
+class RegistrationApi(Resource):
     def post(self):
         try:
             body = request.get_json()
             user = User(**body)
             user.hash_password()
-
+            
             user.save()
             id = user.id
             return {'id': str(id)}, 200
@@ -48,13 +48,16 @@ class LoginApi(Resource):
         try:
             body = request.get_json()
             user = User.objects.get(username=body.get('username'))
+
             authorized = user.check_password(body.get('password'))
+            if not user.enabled:
+                return {'error': 'Not a valid user'}, 404
             if not authorized:
                 return {'error': 'Username or password invalid'}, 401
 
             expires = datetime.timedelta(days=7)
             access_token = create_access_token(identity=str(user.id),\
-                expires_delta=expires)
+                expires_delta=expires, fresh=True)
             refresh_token = create_refresh_token(identity=str(user.id))
             return {'accessToken': access_token, 'refreshToken': refresh_token}, 200
         except (UnauthorizedError, DoesNotExist):
@@ -73,3 +76,23 @@ class LoginApi(Resource):
             raise UnauthorizedError
         except Exception as e:
             raise InternalServerError
+
+
+class TokenApi(Resource):
+    @jwt_required(refresh=True)
+    def post(self):
+        try:
+            user_id = get_jwt_identity()
+            user = User.objects.get(id=user_id)
+            expires = datetime.timedelta(days=7)
+            new_token = create_access_token(identity=str(user.id), \
+                expires_delta=expires, fresh=False)
+
+            return {'accessToken': new_token}, 200
+        except (UnauthorizedError, DoesNotExist):
+            raise UnauthorizedError
+        except Exception as e:
+            raise InternalServerError
+
+
+   
