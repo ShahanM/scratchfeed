@@ -1,0 +1,36 @@
+<!-- <p>dashboard works!</p> -->
+<h2>Dashboard</h2>
+
+<p>Filtering Equation: {{this.linComb}}</p>
+
+<p>Pick Variables to filter your feed</p>
+<div class="container">
+
+	<form [formGroup]="variableForm" (ngSubmit)="onSubmit()">
+		<button type="button" (click)="addTerm()" class="btn btn-primary">Add Rank Term</button>
+		<br />
+		<div *ngFor="let rankTerm of rankTerms().controls; let i=index" formGroupName="terms">
+			<p [formGroupName]="i">
+				<label for="varName">Variable Name</label>
+				<select name="varName" formControlName="varName" class="form-control" (change)="updateEquation()">
+					<option value="">Pick A Category</option>
+					<option value="topic">My Topics</option>
+					<option value="likes">Most Liked</option>
+					<option value="shares">Most Shared</option>
+					<option value="date">Most Recent</option>
+				</select>
+				<label for="weight"> Weight </label>
+				<input type="range" min="1" max="10" value="1" name="weight" formControlName="weight"
+					clas="form-control" (change)="updateEquation()">
+				<button (click)="removeTerm(i)" class="btn btn-danger">Remove</button>
+			</p>
+		</div>
+		<br />
+		<button type="submit" class="btn btn-success">Update Feed</button>
+
+	</form>
+
+	<br />
+	<!-- {{this.variableForm.value | json}} -->
+	<br />
+</div>

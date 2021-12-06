@@ -1,0 +1,145 @@
+[{
+	"username": "Tyler",
+	"post": "This is a great day! I just had the best icecream.",
+	"likes": 30,
+	"shares": 14,
+	"topics": "cats;pets",
+	"date_created": "2021-11-25T03:32:46.344Z"
+},
+{
+	"username": "Aliya",
+	"post": "This is a great day! I just had the best icecream.",
+	"likes": 27,
+	"shares": 14,
+	"topics": "dogs;pets",
+	"date_created": "2021-11-23T03:32:46.344Z"
+},
+{
+	"username": "Tyler",
+	"post": "This is a great day! I just had the best icecream.",
+	"likes": 3,
+	"shares": 1,
+	"topics": "dogs;pets",
+	"date_created": "2021-11-23T03:32:46.344Z"
+},
+{
+	"username": "Braden",
+	"post": "This is a great day! I just had the best icecream.",
+	"likes": 3,
+	"shares": 4,
+	"topics": "icecream;food",
+	"date_created": "2021-11-24T03:32:46.344Z"
+},
+{
+	"username": "Aliya",
+	"post": "This is a great day! I just had the best icecream.",
+	"likes": 4,
+	"shares": 9,
+	"topics": "videogame",
+	"date_created": "2021-11-25T03:32:46.344Z"
+},
+{
+	"username": "Dana",
+	"post": "This is a great day! I just had the best icecream.",
+	"likes": 8,
+	"shares": 6,
+	"topics": "dogs;pets",
+	"date_created": "2021-11-23T03:32:46.344Z"
+},
+{
+	"username": "Dana",
+	"post": "This is a great day! I just had the best icecream.",
+	"likes": 11,
+	"shares": 7,
+	"topics": "cats;pets",
+	"date_created": "2021-11-21T03:32:46.344Z"
+},
+{
+	"username": "Tyler",
+	"post": "This is a great day! I just had the best icecream.",
+	"likes": 12,
+	"shares": 9,
+	"topics": "cats;pets",
+	"date_created": "2021-11-21T03:32:46.344Z"
+},
+{
+	"username": "Aliya",
+	"post": "This is a great day! I just had the best icecream.",
+	"likes": 10,
+	"shares": 1,
+	"topics": "cats;pets",
+	"date_created": "2021-11-24T03:32:46.344Z"
+},
+{
+	"username": "Dana",
+	"post": "This is a great day! I just had the best icecream.",
+	"likes": 3,
+	"shares": 0,
+	"topics": "cats;pets",
+	"date_created": "2021-11-22T03:32:46.344Z"
+},
+{
+	"username": "Samara",
+	"post": "This is a great day! I just had the best icecream.",
+	"likes": 0,
+	"shares": 0,
+	"topics": "cats;pets",
+	"date_created": "2021-11-21T03:32:46.344Z"
+},
+{
+	"username": "Aliya",
+	"post": "This is a great day! I just had the best icecream.",
+	"likes": 12,
+	"shares": 10,
+	"topics": "icecream;food",
+	"date_created": "2021-11-18T03:32:46.344Z"
+},
+{
+	"username": "Dana",
+	"post": "This is a great day! I just had the best icecream.",
+	"likes": 3,
+	"shares": 4,
+	"topics": "videogame",
+	"date_created": "2021-11-16T03:32:46.344Z"
+},
+{
+	"username": "Samara",
+	"post": "This is a great day! I just had the best icecream.",
+	"likes": 9,
+	"shares": 8,
+	"topics": "videogame",
+	"date_created": "2021-11-12T03:32:46.344Z"
+},
+{
+	"username": "Braden",
+	"post": "This is a great day! I just had the best icecream.",
+	"likes": 7,
+	"shares": 3,
+	"topics": "videogame",
+	"date_created": "2021-11-12T03:32:46.344Z"
+},
+{
+	"username": "John",
+	"post": "This is a great day! I just had the best icecream.",
+	"likes": 36,
+	"shares": 1,
+	"topics": "videogame",
+	"date_created": "2021-11-12T03:32:46.344Z"
+},
+{
+	"username": "Tyler",
+	"post": "This is a great day! I just had the best icecream.",
+	"likes": 30,
+	"shares": 40,
+	"topics": "icecream;food",
+	"date_created": "2021-11-18T03:32:46.344Z"
+},
+{
+	"username": "Aliya",
+	"post": "This is a great day! I just had the best icecream.",
+	"likes": 30,
+	"shares": 12,
+	"topics": "icecream;food",
+	"date_created": "2021-11-22T03:32:46.344Z"
+}
+]

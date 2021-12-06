@@ -1,0 +1,20 @@
+<!-- <p>feed works!</p> -->
+<h2>Feed</h2>
+<div *ngIf="postlist">
+	<ul>
+        <li *ngFor="let post of postlist">
+			<div class="post-card">
+				<div class="byline">
+					<p> {{ post.username }} posted on {{ post.date_created }}</p>
+				</div>
+				<div class="post">
+					<p> {{ post.post }} </p>
+				</div>
+				<div class="metadata">
+					<p> {{ post.topics }} </p>
+					<p> Likes: {{ post.likes }} | Shares: {{ post.shares }}</p>
+				</div>
+			</div>
+        </li>
+    </ul>
+</div>
