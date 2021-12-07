@@ -24,7 +24,6 @@ user_info_schema = {
     'email': fields.String
 }
 
-
 class RegistrationApi(Resource):
     def post(self):
         try:

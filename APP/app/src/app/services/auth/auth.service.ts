@@ -5,8 +5,7 @@ import { catchError, map, mergeMap } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { environment } from '../../../environments/environment'
 
-
-const REGISTER_API = environment.appServer + '/api/auth'
+const REGISTER_API = environment.appServer + '/api/auth/register'
 const LOGIN_API = environment.appServer + '/api/auth/login';
 const LOGOUT_API = environment.appServer + '/api/auth/logout';
 const REFRESH_API = environment.appServer + '/api/auth/refresh';
@@ -22,6 +21,7 @@ interface RefreshResponse {
 }
 
 interface UserInfo {
+    userid: string;
     username: string;
     enabled: boolean;
     email: string;
@@ -33,15 +33,16 @@ interface UserInfo {
 })
 export class AuthService {
     private jwt: JwtHelperService = new JwtHelperService();
-    private authStatus: BehaviorSubject<boolean> = 
-        new BehaviorSubject(this.isAuthenticated());
-    
-    private headers: HttpHeaders = new HttpHeaders();
+    private authStatus: BehaviorSubject<boolean> = new BehaviorSubject(this.isAuthenticated());
+
+    private headers: HttpHeaders;
 
     constructor(private http: HttpClient) {
-        this.headers.append('Access-Control-Allow-Origin', '*');
-        this.headers.append("Access-Control-Allow-Methods", "DELETE, POST, GET, OPTIONS");
-        this.headers.append("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With")
+        this.headers = new HttpHeaders({
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
+            "Access-Control-Allow-Headers": "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With"
+        });
     }
 
     // Handle authentication error
@@ -59,12 +60,11 @@ export class AuthService {
         this.authStatus.subscribe(next);
     }
 
-    register(username: string, email: string, firstname: string, 
-        lastname: string, password: string){
-            return this.http.post(REGISTER_API, { username, email, 
-            firstname, lastname, password }, { headers: this.headers })
+    register(username: string, email: string, firstname: string,
+        lastname: string, password: string) {
+        return this.http.post(REGISTER_API, { username, email, firstname, lastname, password }, { headers: this.headers })
             .pipe(
-                mergeMap(_response => {
+                mergeMap(response => {
                     return this.authenticate(username, password);
                 }),
                 catchError(this.errorHandler)
@@ -72,7 +72,7 @@ export class AuthService {
     }
 
     // Log user in and get refresh/access tokens
-    authenticate(username: string, password: string){
+    authenticate(username: string, password: string) {
         return this.http.post<LoginResponse>(LOGIN_API, { username, password })
             .pipe(
                 mergeMap(response => {
@@ -87,18 +87,22 @@ export class AuthService {
                     //         'Authorization': 'Bearer ' + localStorage.getItem('accessToken') 
                     //     })
                     // };
-                    this.headers.append('Authorization', 'Bearer ' + localStorage.getItem('accessToken'))
-                    return this.http.get<UserInfo>(LOGIN_API, {headers: this.headers}).pipe(
+                    let loginHeaders = this.headers.append("Authorization", "Bearer " + localStorage.getItem("accessToken"))
+                    console.log(this.headers);
+                    return this.http.get<UserInfo>(LOGIN_API, { headers: loginHeaders }).pipe(
                         map(userInfo => {
+                            console.log("userInfo");
+                            console.log(userInfo);
+                            localStorage.setItem('userid', userInfo.userid);
                             localStorage.setItem('username', userInfo.username);
                             localStorage.setItem('enabled', String(userInfo.enabled));
-                            localStorage.setItem('email', String(userInfo.email));
+                            localStorage.setItem('email', userInfo.email);
                             this.authStatus.next(true);
                         })
                     )
                 }),
                 catchError(this.errorHandler)
-            );
+            )
     }
 
     // Log user out, clear stored tokens
@@ -110,6 +114,7 @@ export class AuthService {
         // };
         localStorage.clear();
         this.authStatus.next(false);
+        // TODO invalidate accessToken and RefreshToken in Logout API
         // return this.http.post(LOGOUT_API, {}, opts)
         //     .pipe(
         //         map(response => null),
@@ -120,30 +125,16 @@ export class AuthService {
     // Get access token, automatically refresh if necessary
     getAccessToken(): Observable<string> {
         const accessToken = localStorage.getItem('accessToken') || '';
-        const refreshToken = localStorage.getItem('refreshToken') || '';
         if (!this.jwt.isTokenExpired(accessToken)) {
             return new BehaviorSubject(accessToken);
-        } else if (this.jwt.isTokenExpired(refreshToken)) {
+        } else if (this.jwt.isTokenExpired(accessToken)) {
             console.log('refreshing access token');
-            const headers = new HttpHeaders({
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': "DELETE, POST, GET, OPTIONS",
-                'Access-Control-Allow-Headers': "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With",
-                'Authorization': 'Bearer ' + refreshToken
-            });
-            // const headers = new HttpHeaders();
-            // headers.append("Access-Control-Allow-Origin", "*");
-            // headers.append("Access-Control-Allow-Methods", "DELETE, POST, GET, OPTIONS");
-            // headers.append("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With")
-            // headers.append("Authorization", "Bearer " + refreshToken)
-            console.log(headers);
-            // const opts = {
-            //     headers: new HttpHeaders({
-            //         'Access-Control-Allow-Origin': '*',
-            //         'Authorization': 'Bearer ' + refreshToken
-            //     })
-            // };
-            return this.http.post<RefreshResponse>(REFRESH_API, {}, {headers: headers}).pipe(
+            const refreshToken = localStorage.getItem('refreshToken') || '';
+            let refreshHeaders = this.headers.append('Authorization', 'Bearer ' + refreshToken)
+    
+            console.log(refreshHeaders);
+
+            return this.http.post<RefreshResponse>(REFRESH_API, {}, { headers: refreshHeaders }).pipe(
                 map(response => {
                     localStorage.setItem('accessToken', response.accessToken);
                     console.log('authentication refresh successful');
@@ -157,10 +148,10 @@ export class AuthService {
 
     // User is logged in
     isAuthenticated(): boolean {
-        console.log(localStorage.getItem('enabled') === 'True');
+        console.log(localStorage.getItem('enabled') === 'true');
         return localStorage.getItem('username') !== null &&
-                localStorage.getItem('enabled') === 'True' &&
-                !this.jwt.isTokenExpired(localStorage.getItem('refreshToken') || '');
+            localStorage.getItem('enabled') === 'true' &&
+            !this.jwt.isTokenExpired(localStorage.getItem('refreshToken') || '');
     }
 
     // User is an administrator
