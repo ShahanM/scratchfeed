@@ -5,13 +5,17 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
+import { HomeComponent } from './components/home/home.component';
+import { LoginComponent } from './components/login/login.component';
 import { AuthInterceptor } from './services/auth/auth.interceptor';
-import { PostComponent } from './post/post.component';
-import { ProfileComponent } from './profile/profile.component';
-import { FeedComponent } from './feed/feed.component';
-import { RegistrationComponent } from './registration/registration.component';
+import { PostComponent } from './components/post/post.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { FeedComponent } from './components/feed/feed.component';
+import { RegistrationComponent } from './components/registration/registration.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { ControlpanelComponent } from './components/controlpanel/controlpanel.component';
+import { ScorewidgetComponent } from './components/scorewidget/scorewidget.component';
+import { FeedstatsComponent } from './components/feedstats/feedstats.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +25,11 @@ import { RegistrationComponent } from './registration/registration.component';
     PostComponent,
     ProfileComponent,
     FeedComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    DashboardComponent,
+    ControlpanelComponent,
+    ScorewidgetComponent,
+    FeedstatsComponent
   ],
   imports: [
     BrowserModule,

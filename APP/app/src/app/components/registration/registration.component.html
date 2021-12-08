@@ -1,0 +1,20 @@
+<div class="container">
+	<div class="form-content">
+		<!-- <h1>Login:</h1> -->
+		<p class="intro">
+			Welcome to ScratchFeed, your own Social Media feed building sandbox. Get started with an account!
+		</p>
+		<form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+			<div class="form">
+				<p class="error-message">{{ message }}</p>
+				<input class="form-input" type="text" formControlName="username" placeholder="Username">
+				<input class="form-input" type="text" formControlName="email" placeholder="Email">
+				<input class="form-input" type="text" formControlName="firstname" placeholder="First Name">
+				<input class="form-input" type="text" formControlName="lastname" placeholder="Last Name">
+				<input class="form-input" type="password" formControlName="password" placeholder="Password">
+				<button class="form-input" type="submit" [disabled]="!registrationForm.valid">Sign Up</button>
+			</div>
+		</form>
+		<p class="form-footer">Already have an account? <a routerLink="/login">Log In</a></p>
+	</div>
+</div>

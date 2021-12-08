@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService, PostResponse, PostSchema } from '../services/feed/api.service';
+import { ApiService, PostResponse, PostSchema } from '../../services/feed/api.service';
 
 @Component({
   selector: 'app-profile',
