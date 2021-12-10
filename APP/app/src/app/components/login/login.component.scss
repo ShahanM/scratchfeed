@@ -46,3 +46,7 @@ p.form-footer {
 input.form-input {
 	padding-left: 9px;
 }
+
+input.form-input:focus::placeholder {
+	color: transparent;
+}

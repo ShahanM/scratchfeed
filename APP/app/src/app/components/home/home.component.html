@@ -1,15 +1,17 @@
-<div *ngIf="authenticated">
-    <p style="color: blue">
-      Logged in as <strong>{{ username }}</strong>
-      <span *ngIf="isAdmin"><strong>[administrator]</strong></span>
-    </p>
+<div class="container">
+	<div class="header">
+		<div *ngIf="authenticated" class="menu-ribbon">
+			<p style="color: blue">
+				Hi <strong>{{ username }}</strong>!
+				<span *ngIf="isAdmin"><strong>[administrator]</strong></span>
+			</p>
+			<a routerLink="/feed"><p class="menu-button">Feed</p></a>
+			<a routerLink="/profile"><p class="menu-button">Profile</p></a>
+			<a routerLink="/dashboard"><p class="menu-button">Dashboard</p></a>
+			<a routerLink="/logout"><p class="menu-button">Log out</p></a>
+		</div>
+	</div>
+	<div class="content-container"></div>
+	<div class="footer"></div>
+	<router-outlet></router-outlet>
 </div>
-  
-<ul>
-    <li><a routerLink="/feed">Feed</a></li>
-    <li><a routerLink="/profile">Profile</a></li>
-    <li><a routerLink="/dashboard">Dashboard</a></li>
-    <li><a routerLink="/logout">Log out</a></li>
-</ul>
-  
-<router-outlet></router-outlet>

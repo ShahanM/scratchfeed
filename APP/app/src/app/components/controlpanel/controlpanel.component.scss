@@ -1,0 +1,68 @@
+.equation-block {
+	padding: 0;
+	height:90px;
+	background-color: silver;
+}
+
+.block-header {
+	background-color: gray;
+	height: 27px;
+}
+
+.block-header p {
+	padding: 5px 0 0 9px;
+	font-weight: bold;
+	margin: 0 auto 0 auto;
+}
+
+.block-content p {
+	padding: 5px 0 0 9px;
+}
+
+.variable-block {
+	background-color: silver;
+	height: 270px;
+}
+
+.control-input {
+	width: 180px;
+	height: 36px;
+	vertical-align: bottom;
+	font-size: medium;
+	border-radius: 9px;
+	box-sizing: border-box;
+	padding-left: 9px;
+	margin: 9px 9px 3px 9px;
+}
+
+.outer-row {
+	display: inline-flex;
+    padding: 0 0px 0 9px;
+}
+
+.outer-row p {
+	width: 450px;
+}
+
+.control-remove {
+	width: 45px;
+	height: 36px;
+	vertical-align: bottom;
+	font-weight: bold;
+	font-size: medium;
+	border-radius: 9px;
+	box-sizing: border-box;
+	margin: 0 9px 0 9px;
+}
+
+.input-column-label {
+	display: inline-block;
+	width: 180px;
+	margin: 0 9px 0 45px;
+	font-size: medium;
+}
+
+.form-row {
+	margin: 9px 0 0 0;
+    width: 459px;
+}

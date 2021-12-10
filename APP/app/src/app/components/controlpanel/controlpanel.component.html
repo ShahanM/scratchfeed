@@ -1,1 +1,49 @@
-<p>controlpanel works!</p>
+<!-- <p>dashboard works!</p> -->
+<!-- <h2>Dashboard</h2> -->
+<!-- <br /> -->
+<div class="equation-block">
+	<div class="block-header">
+		<p>Filtering Equation: </p>
+	</div>
+	<div class="block-content">
+		<p><strong>{{this.linComb}}</strong></p>
+	</div>
+</div>
+<br />
+<div class="outer-row">
+	<p>Pick Variables to filter your feed</p>
+	<button type="button" (click)="addTerm()" class="btn btn-primary control-input">Add Variable</button>
+</div>
+<div class="container">
+	<form [formGroup]="variableForm" (ngSubmit)="onSubmit()">
+		<div class="variable-block">
+			<div class="block-header">
+				<p><span class="input-column-label">Variable Type</span> <span class="input-column-label">Weight</span>
+				</p>
+			</div>
+			<div *ngFor="let rankTerm of rankTerms().controls; let i=index" formGroupName="terms" class="form-row">
+				<div class="variable-container" [formGroupName]="i">
+					<!-- <label for="varName">Variable Type</label> -->
+					<select name="varName" formControlName="varName" class="control-input" (change)="updateEquation()">
+						<option value="">Pick A Category</option>
+						<option value="topic">My Topics</option>
+						<option value="likes">Most Liked</option>
+						<option value="shares">Most Shared</option>
+						<option value="date">Most Recent</option>
+					</select>
+					<!-- <label for="weight"> Weight </label> -->
+					<input type="range" min="1" max="10" value="1" name="weight" formControlName="weight"
+						class="control-input" (change)="updateEquation()">
+					<button (click)="removeTerm(i)" class="btn btn-danger control-remove">X</button>
+				</div>
+			</div>
+		</div>
+		<br />
+		<button type="submit" class="btn btn-success control-input">Update Feed</button>
+
+	</form>
+
+	<br />
+	<!-- {{this.variableForm.value | json}} -->
+	<br />
+</div>

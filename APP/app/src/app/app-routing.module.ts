@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ControlpanelComponent } from './components/controlpanel/controlpanel.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { FeedComponent } from './components/feed/feed.component';
 import { HomeComponent } from './components/home/home.component';
@@ -16,6 +17,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     canActivateChild: [AuthGuard],
     children: [
+
       {
         path: 'feed',
         component: FeedComponent
@@ -26,7 +28,19 @@ const routes: Routes = [
       },
       {
         path: 'dashboard',
-        component: DashboardComponent
+        component: DashboardComponent,
+        children : [
+          {
+            path: '',
+            component: ControlpanelComponent,
+            outlet: "controlPanel"
+          },
+          {
+            path: '',
+            component: FeedComponent,
+            outlet: 'feed'
+          }
+        ]
       }
     ]
   },

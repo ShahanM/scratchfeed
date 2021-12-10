@@ -1,0 +1,28 @@
+.container {
+	width: 1200px;
+	margin: 0 auto 0 auto;
+}
+
+.menu-ribbon {
+	background-color:darkgray;
+	text-align: left;
+	display: flex;
+}
+
+.menu-ribbon p {
+	height: 27px;
+	display: block;
+	font-size: medium;
+	margin: 1px 1px 1px 1px;
+	padding: 9px 9px 3px 9px;
+
+}
+
+p.menu-button{
+	background-color: gray;
+	border-radius: 3px;
+}
+
+p.menu-button:hover {
+	background-color: rgb(209, 209, 209);
+}
